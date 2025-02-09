@@ -6,10 +6,6 @@ import { ExpensesList } from "../components/expenses-list"
 import { ExpensesChart } from "../components/expenses-chart"
 import Link from "next/link"
 
-export const metadata: Metadata = {
-  title: "Expenses",
-  description: "Track and manage business expenses",
-}
 
 export default function ExpensesPage() {
   return (

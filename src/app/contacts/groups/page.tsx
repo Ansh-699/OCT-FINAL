@@ -1,9 +1,5 @@
 import type { Metadata } from "next"
 
-export const metadata: Metadata = {
-  title: "Contact Groups",
-  description: "Manage contact groups",
-}
 
 interface ContactGroup {
   id: string;

@@ -1,9 +1,6 @@
 import type { Metadata } from "next"
 
-export const metadata: Metadata = {
-  title: "Add Contact",
-  description: "Add a new contact to the system",
-}
+
 
 export default function AddContactPage() {
   return (

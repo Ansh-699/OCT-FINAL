@@ -5,10 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../co
 import DealsList from "../components/deals-list"
 import Link from "next/link"
 
-export const metadata: Metadata = {
-  title: "Deals",
-  description: "View and manage crypto deals",
-}
 
 export default function DealsPage() {
   return (

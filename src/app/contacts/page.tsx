@@ -5,10 +5,6 @@ import { Button } from "../components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
 import { ContactsList } from "../components/contacts-list"
 
-export const metadata: Metadata = {
-  title: "Contacts",
-  description: "Manage your contacts and their financial statements",
-}
 
 export default function ContactsPage() {
   return (

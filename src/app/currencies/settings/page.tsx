@@ -2,11 +2,6 @@
 import { useState } from "react";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Currency Settings",
-  description: "Manage currency settings",
-};
-
 export default function CurrencySettingsPage() {
   const [activeTab, setActiveTab] = useState("general");
 

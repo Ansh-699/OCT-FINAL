@@ -1,9 +1,6 @@
 import type { Metadata } from "next"
 
-export const metadata: Metadata = {
-  title: "Add Expense",
-  description: "Add a new expense",
-}
+
 
 export default function AddExpensePage() {
   return (

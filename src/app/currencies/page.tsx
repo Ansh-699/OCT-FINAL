@@ -6,10 +6,7 @@ import { CurrenciesList } from "../components/currencies-list"
 import { CurrencyChart } from "../components/currency-chart"
 import Link from "next/link"
 
-export const metadata: Metadata = {
-  title: "Currencies",
-  description: "Manage cryptocurrencies and fiat currencies",
-}
+
 
 export default function CurrenciesPage() {
   return (

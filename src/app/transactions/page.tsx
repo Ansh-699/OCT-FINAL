@@ -5,10 +5,7 @@ import { Button } from "../components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
 import { TransactionsList } from "../components/transactions-list"
 
-export const metadata: Metadata = {
-  title: "Transactions",
-  description: "View and manage all transactions",
-}
+
 
 export default function TransactionsPage() {
   return (
