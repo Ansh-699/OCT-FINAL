@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@fontsource/nunito": "^5.0.2",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-alert-dialog": "^1.1.6",
@@ -56,10 +59,11 @@
     "next-themes": "^0.4.4",
     "perfect-scrollbar": "^1.5.5",
     "react": "18.2.0",
-    "react-apexcharts": "^1.7.0",
+    "react-apexcharts": "^1.4.0",
     "react-day-picker": "^9.5.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.54.2",
+    "react-paginate": "^8.3.0",
     "react-resizable-panels": "^2.1.7",
     "recharts": "^2.15.1",
     "sass": "^1.62.1",
@@ -70,6 +74,7 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
-    "@types/date-fns": "^2.5.3"
+    "@types/date-fns": "^2.5.3",
+    "@types/react-fontawesome": "^1.6.8"
   }
 }

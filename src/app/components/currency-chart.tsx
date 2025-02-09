@@ -52,13 +52,13 @@ export function CurrencyChart() {
       <LineChart data={data}>
         <XAxis 
           dataKey="time" 
-          stroke="#607080" // Mazer text-secondary color
+          stroke="#6c757d" // Mazer text-secondary color
           fontSize={12} 
           tickLine={false} 
           axisLine={false} 
         />
         <YAxis
-          stroke="#607080" // Mazer text-secondary color
+          stroke="#6c757d" // Mazer text-secondary color
           fontSize={12}
           tickLine={false}
           axisLine={false}
@@ -67,22 +67,25 @@ export function CurrencyChart() {
         <Tooltip 
           contentStyle={{ 
             backgroundColor: '#ffffff',
-            border: '1px solid #dce7f1' // Mazer border color
+            border: '1px solid #dce7f1', // Mazer border color
+            borderRadius: '8px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)'
           }}
+          itemStyle={{ color: '#495057' }} // Mazer text color
         />
         <Line 
           type="monotone" 
           dataKey="BTC" 
           stroke="#435ebe" // Mazer primary color
           strokeWidth={2} 
-          dot={false} 
+          dot={{ r: 4, stroke: '#ffffff', strokeWidth: 2 }} 
         />
         <Line 
           type="monotone" 
           dataKey="ETH" 
           stroke="#198754" // Mazer success color
           strokeWidth={2} 
-          dot={false} 
+          dot={{ r: 4, stroke: '#ffffff', strokeWidth: 2 }} 
         />
       </LineChart>
     </ResponsiveContainer>
