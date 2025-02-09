@@ -1,17 +1,9 @@
-"use client"
-import type { Metadata } from "next"
-import { Circle, Home, Phone, LifeBuoy, Moon } from "lucide-react"
+"use client" // Client Component
 
-import { Button } from "./components/ui/button"
+import { DateRangeSelector } from "./components/date-range-selector"
 import { BalanceBoxes } from "./components/balance-boxes"
 import { FinancialCharts } from "./components/financial-charts"
 import { TopDebtorsCreditors } from "./components/top-debtors-creditors"
-import { DateRangeSelector } from "./components/date-range-selector"
-
-export const metadata: Metadata = {
-    title: "Dashboard",
-    description: "Crypto OTC accounting system dashboard",
-}
 
 export default function DashboardPage() {
     return (
@@ -23,7 +15,6 @@ export default function DashboardPage() {
                 {/* Top Bar Icons & Controls */}
                 <div className="flex justify-end items-end space-x-4 w-full md:w-auto">
                     <DateRangeSelector onDateChange={(range) => console.log(range)} />
-                
                 </div>
             </div>
 
