@@ -1,7 +1,5 @@
 import type { Metadata } from "next"
 
-
-
 export default function NewDealPage() {
   return (
     <div className="page-heading">
@@ -12,7 +10,7 @@ export default function NewDealPage() {
 
       <section className="section">
         <div className="d-flex justify-content-center">
-          <div className="card" style={{ width: "50%" }}>
+          <div className="card" style={{ width: "100%", maxWidth: "800px" }}>
             <div className="card-header">
               <h4 className="card-title">Deal Details</h4>
             </div>

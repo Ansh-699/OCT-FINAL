@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Contact2, Plus, DollarSign } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { ContactsList } from "../components/contacts-list";
+import { ArrowUpRight } from "lucide-react";
 
 export default function ContactsPage() {
   return (
@@ -25,38 +26,44 @@ export default function ContactsPage() {
       </div>
 
       {/* Summary Cards */}
-      <section className="row">
+      <section className="row g-4 mb-4">
         <div className="col-12 col-lg-4">
-          <div className="card">
-            <div className="card-body px-4 py-5">
-              <div className="row">
-                <div className="col-md-4 col-lg-12 d-flex justify-content-start">
-                  <Contact2 className="stats-icon purple mb-2" />
-                </div>
-                <div className="col-md-8 col-lg-12">
-                  <h6 className="text-muted font-semibold">Total Contacts</h6>
-                  <h6 className="font-extrabold mb-0">2,350</h6>
-                  <span className="text-success small">+180 this month</span>
-                </div>
-              </div>
+          <div className="card shadow-sm hover:shadow-md transition-shadow">
+        <div className="card-body p-4">
+          <div className="d-flex align-items-center gap-4">
+            <div className="rounded-circle bg-primary bg-opacity-10 p-3">
+          <Contact2 className="h-6 w-6 text-primary" />
             </div>
+            <div>
+          <h6 className="text-muted font-semibold mb-1">Total Contacts</h6>
+          <h4 className="font-extrabold mb-1">2,350</h4>
+          <span className="text-success d-flex align-items-center">
+            <ArrowUpRight className="h-2 w-2 mr-1" />
+            +180 this month
+          </span>
+            </div>
+          </div>
+        </div>
           </div>
         </div>
         
         <div className="col-12 col-lg-4">
-          <div className="card">
-            <div className="card-body px-4 py-5">
-              <div className="row">
-                <div className="col-md-4 col-lg-12 d-flex justify-content-start">
-                  <DollarSign className="stats-icon blue mb-2" />
-                </div>
-                <div className="col-md-8 col-lg-12">
-                  <h6 className="text-muted font-semibold">Active Balance</h6>
-                  <h6 className="font-extrabold mb-0">$12,234</h6>
-                  <span className="text-success small">+10.1% from last month</span>
-                </div>
-              </div>
+          <div className="card shadow-sm hover:shadow-md transition-shadow">
+        <div className="card-body p-4">
+          <div className="d-flex align-items-center gap-4">
+            <div className="rounded-circle bg-success bg-opacity-10 p-3">
+          <DollarSign className="h-6 w-6 text-success" />
             </div>
+            <div>
+          <h6 className="text-muted font-semibold mb-1">Active Balance</h6>
+          <h4 className="font-extrabold mb-1">$12,234</h4>
+          <span className="text-success d-flex align-items-center">
+            <ArrowUpRight className="h-2 w-2 mr-1" />
+            +10.1% from last month
+          </span>
+            </div>
+          </div>
+        </div>
           </div>
         </div>
       </section>

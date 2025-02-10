@@ -122,19 +122,21 @@ function DataTable<T extends { [key: string]: any }>({
           </div>
           <div>
             <button
-            className="btn btn-primary me-2"
+            className="btn btn-primary ms-2"
             onClick={handlePrev}
             disabled={currentPage === 1}
+            style={{ width: '100px' }}
             >
             Previous
             </button>
-            <span>
+            <span className="mx-2">
             Page {currentPage} of {totalPages}
             </span>
             <button
             className="btn btn-primary ms-2"
             onClick={handleNext}
             disabled={currentPage === totalPages || totalPages === 0}
+            style={{ width: '100px' }}
             >
             Next
             </button>
