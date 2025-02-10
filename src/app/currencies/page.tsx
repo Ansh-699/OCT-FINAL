@@ -19,7 +19,7 @@ export default function CurrenciesPage() {
           </div>
           <div className="col-12 col-md-6 order-md-2 order-first">
             <Button asChild className="btn btn-primary float-end">
-              <Link href="/currencies/add" className="flex items-center">
+              <Link href="/currencies/rates" className="flex items-center">
                 <Plus className="mr-2 h-4 w-4" /> Add Currency
               </Link>
             </Button>
