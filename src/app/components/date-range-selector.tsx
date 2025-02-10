@@ -25,41 +25,43 @@ export function DateRangeSelector({ onDateChange }: { onDateChange: (range: { fr
   }
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button className="btn btn-primary rounded-pill">
-          {dateRange?.from && dateRange?.to
-            ? `${format(dateRange.from, "MMM dd, yyyy")} - ${format(dateRange.to, "MMM dd, yyyy")}`
-            : "Select Date Range"}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="card shadow-lg">
-        <div className="card-content">
-          <div className="card-body">
-            <Calendar mode="range" selected={dateRange} onSelect={handleSelectDate} />
-            <div className="buttons mt-3 d-flex gap-2">
-              <Button 
-                onClick={() => setQuickRange(7)} 
-                className="btn btn-sm btn-outline-primary rounded-pill"
-              >
-                Last Week
-              </Button>
-              <Button 
-                onClick={() => setQuickRange(30)} 
-                className="btn btn-sm btn-outline-primary rounded-pill"
-              >
-                Last Month
-              </Button>
-              <Button 
-                onClick={() => setQuickRange(365)} 
-                className="btn btn-sm btn-outline-primary rounded-pill"
-              >
-                Last Year
-              </Button>
+    <div className="d-flex justify-content-end">
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button className="btn btn-primary rounded-pill">
+            {dateRange?.from && dateRange?.to
+              ? `${format(dateRange.from, "MMM dd, yyyy")} - ${format(dateRange.to, "MMM dd, yyyy")}`
+              : "Select Date Range"}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="card shadow-lg bg-dark text-white">
+          <div className="card-content">
+            <div className="card-body">
+              <Calendar className="text-light" mode="range" selected={dateRange} onSelect={handleSelectDate} />
+              <div className="buttons mt-3 d-flex gap-2">
+                <Button 
+                  onClick={() => setQuickRange(7)} 
+                  className="btn btn-sm btn-outline-light rounded-pill"
+                >
+                  Last Week
+                </Button>
+                <Button 
+                  onClick={() => setQuickRange(30)} 
+                  className="btn btn-sm btn-outline-light rounded-pill"
+                >
+                  Last Month
+                </Button>
+                <Button 
+                  onClick={() => setQuickRange(365)} 
+                  className="btn btn-sm btn-outline-light rounded-pill"
+                >
+                  Last Year
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      </PopoverContent>
-    </Popover>
+        </PopoverContent>
+      </Popover>
+    </div>
   )
 }

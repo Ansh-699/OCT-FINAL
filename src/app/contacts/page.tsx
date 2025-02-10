@@ -6,7 +6,7 @@ import { ContactsList } from "../components/contacts-list";
 
 export default function ContactsPage() {
   return (
-    <div className="page-heading container mt-10 m-4 max-w-screen-xl mx-auto overflow-hidden overflow-x-hidden no-scrollbar">
+    <div className="page-heading container mt-10 ml-5 max-w-screen-xl mx-auto overflow-hidden overflow-x-hidden no-scrollbar">
       {/* Header Section */}
       <div className="page-title">
         <div className="row">

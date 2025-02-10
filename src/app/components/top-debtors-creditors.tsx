@@ -1,4 +1,217 @@
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import React, { useState, useMemo, useEffect } from "react";
+
+interface Column<T> {
+  header: string;
+  accessor: keyof T;
+  formatter?: (value: any, row: T) => React.ReactNode;
+  cellClass?: string;
+}
+
+interface DataTableProps<T> {
+  data: T[];
+  columns: Column<T>[];
+  title: string;
+  titleClass: string;
+}
+
+function DataTable<T extends { [key: string]: any }>({
+  data,
+  columns,
+  title,
+  titleClass,
+}: DataTableProps<T>) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [entriesPerPage, setEntriesPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const filteredData = useMemo(() => {
+    if (!searchTerm) return data;
+    return data.filter((row) =>
+      Object.values(row)
+        .join(" ")
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
+    );
+  }, [searchTerm, data]);
+
+  const totalEntries = filteredData.length;
+  const totalPages = Math.ceil(totalEntries / entriesPerPage);
+
+  const currentData = useMemo(() => {
+    const start = (currentPage - 1) * entriesPerPage;
+    return filteredData.slice(start, start + entriesPerPage);
+  }, [currentPage, entriesPerPage, filteredData]);
+
+  const handlePrev = () => {
+    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
+  const handleNext = () => {
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  };
+
+  // Reset current page when entriesPerPage or searchTerm changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [entriesPerPage, searchTerm]);
+
+  return (
+    <div className="mb-4">
+      <h5 className={titleClass}>{title}</h5>
+      <div className="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          Show{" "}
+          <select
+            className="form-select d-inline-block w-auto"
+            value={entriesPerPage}
+            onChange={(e) => setEntriesPerPage(Number(e.target.value))}
+          >
+            {[5, 10, 15, 20].map((num) => (
+              <option key={num} value={num}>
+                {num}
+              </option>
+            ))}
+          </select>{" "}
+          entries
+        </div>
+        <div>
+          Search:{" "}
+          <input
+            type="text"
+            className="form-control d-inline-block w-auto"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="table-responsive">
+        <table className="table table-striped table-bordered table-hover">
+          <thead className="table-light">
+            <tr>
+              {columns.map((col, index) => (
+          <th key={index}>{col.header}</th>
+              ))}
+            </tr>
+          </thead>
+            <tbody>
+            {currentData.length > 0 ? (
+              currentData.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {columns.map((col, colIndex) => (
+                <td key={colIndex} className={col.cellClass || ""}>
+                  {col.formatter
+                  ? col.formatter(row[col.accessor], row)
+                  : row[col.accessor]}
+                </td>
+                ))}
+              </tr>
+              ))
+            ) : (
+              <tr>
+              <td colSpan={columns.length} className="text-center">
+                No data found
+              </td>
+              </tr>
+            )}
+            </tbody>
+          </table>
+          </div>
+          <div className="d-flex justify-content-between align-items-center">
+          <div>
+            Showing {currentData.length} of {totalEntries} entries
+          </div>
+          <div>
+            <button
+            className="btn btn-primary me-2"
+            onClick={handlePrev}
+            disabled={currentPage === 1}
+            >
+            Previous
+            </button>
+            <span>
+            Page {currentPage} of {totalPages}
+            </span>
+            <button
+            className="btn btn-primary ms-2"
+            onClick={handleNext}
+            disabled={currentPage === totalPages || totalPages === 0}
+            >
+            Next
+            </button>
+          </div>
+          </div>
+        </div>
+        );
+      }
+
+      export function TopDebtorsCreditors() {
+        const debtorColumns = [
+        {
+          header: "Name",
+          accessor: "name" as const,
+          cellClass: "text-bold-500",
+        },
+        {
+          header: "Amount",
+          accessor: "amount" as const,
+          formatter: (value: number) => `$${value.toLocaleString()}`,
+          cellClass: "text-danger",
+        },
+        {
+          header: "Currency",
+          accessor: "currency" as const,
+        },
+        {
+          header: "Date",
+          accessor: "date" as const,
+        },
+        ];
+
+  const creditorColumns = [
+    {
+      header: "Name",
+      accessor: "name" as const,
+      cellClass: "text-bold-500",
+    },
+    {
+      header: "Amount",
+      accessor: "amount" as const,
+      formatter: (value: number) => `$${value.toLocaleString()}`,
+      cellClass: "text-success",
+    },
+    {
+      header: "Currency",
+      accessor: "currency" as const,
+    },
+    {
+      header: "Date",
+      accessor: "date" as const,
+    },
+  ];
+
+  return (
+    <div className="row m-4">
+      <div className="col-md-6">
+        <DataTable
+          data={mockDebtors}
+          columns={debtorColumns}
+          title="Top Debtors"
+          titleClass="text-danger"
+        />
+      </div>
+      <div className="col-md-6">
+        <DataTable
+          data={mockCreditors}
+          columns={creditorColumns}
+          title="Top Creditors"
+          titleClass="text-success"
+        />
+      </div>
+    </div>
+  );
+}
+
+// Mock data arrays below
 const mockDebtors = [
   { name: "John Doe", amount: 1000, currency: "USD", date: "2023-01-01" },
   { name: "Jane Smith", amount: 2000, currency: "USD", date: "2023-01-02" },
@@ -11,7 +224,7 @@ const mockDebtors = [
   { name: "Robert Martin", amount: 1900, currency: "USD", date: "2023-01-17" },
   { name: "Jennifer Lee", amount: 3300, currency: "USD", date: "2023-01-19" },
   { name: "William Clark", amount: 2700, currency: "USD", date: "2023-01-21" },
-  { name: "Patricia White", amount: 3900, currency: "USD", date: "2023-01-23" }
+  { name: "Patricia White", amount: 3900, currency: "USD", date: "2023-01-23" },
 ];
 
 const mockCreditors = [
@@ -26,73 +239,5 @@ const mockCreditors = [
   { name: "Isabel Young", amount: 2300, currency: "USD", date: "2023-01-18" },
   { name: "Kevin King", amount: 3800, currency: "USD", date: "2023-01-20" },
   { name: "Lucy Baker", amount: 2400, currency: "USD", date: "2023-01-22" },
-  { name: "Mark Scott", amount: 3600, currency: "USD", date: "2023-01-24" }
+  { name: "Mark Scott", amount: 3600, currency: "USD", date: "2023-01-24" },
 ];
-
-export function TopDebtorsCreditors() {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 m-4">
-      {/* Debtors */}
-      <Card className="card">
-        <CardHeader className="card-header">
-          <CardTitle className="card-title text-danger">Top 20 Debtors</CardTitle>
-        </CardHeader>
-        <CardContent className="card-body">
-          <div className="table-responsive">
-            <table className="table table-hover mb-0">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Amount</th>
-                  <th>Currency</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mockDebtors.map((debtor, index) => (
-                  <tr key={index}>
-                    <td className="text-bold-500">{debtor.name}</td>
-                    <td className="text-danger">${debtor.amount}</td>
-                    <td>{debtor.currency}</td>
-                    <td>{debtor.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Creditors */}
-      <Card className="card">
-        <CardHeader className="card-header">
-          <CardTitle className="card-title text-success">Top 20 Creditors</CardTitle>
-        </CardHeader>
-        <CardContent className="card-body">
-          <div className="table-responsive">
-            <table className="table table-hover mb-0">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Amount</th>
-                  <th>Currency</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mockCreditors.map((creditor, index) => (
-                  <tr key={index}>
-                    <td className="text-bold-500">{creditor.name}</td>
-                    <td className="text-success">${creditor.amount}</td>
-                    <td>{creditor.currency}</td>
-                    <td>{creditor.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}

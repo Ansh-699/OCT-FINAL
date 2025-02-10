@@ -49,12 +49,15 @@
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "cmdk": "^1.0.4",
+    "datatables.net": "^2.2.2",
+    "datatables.net-dt": "^2.2.2",
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.5.2",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "framer-motion": "^12.4.1",
     "input-otp": "^1.4.2",
+    "jquery": "^3.7.1",
     "lucide-react": "^0.475.0",
     "next": "13.4.4",
     "next-themes": "^0.4.4",
@@ -62,6 +65,7 @@
     "react": "18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-chartjs-2": "^5.3.0",
+    "react-datepicker": "^8.0.0",
     "react-day-picker": "^9.5.1",
     "react-dom": "18.2.0",
     "react-flow-renderer": "^10.3.17",
@@ -79,6 +83,7 @@
   },
   "devDependencies": {
     "@types/date-fns": "^2.5.3",
+    "@types/jquery": "^3.5.32",
     "@types/react-chartjs-2": "^2.0.2",
     "@types/react-fontawesome": "^1.6.8"
   }
