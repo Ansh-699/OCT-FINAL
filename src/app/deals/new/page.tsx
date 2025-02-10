@@ -1,9 +1,6 @@
 import type { Metadata } from "next"
 
-export const metadata: Metadata = {
-  title: "New Deal",
-  description: "Create a new deal",
-}
+
 
 export default function NewDealPage() {
   return (

@@ -2,10 +2,6 @@
 import { useState } from "react";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Exchange Rates",
-  description: "View and manage exchange rates",
-};
 
 export default function ExchangeRatesPage() {
   const [exchangeRates, setExchangeRates] = useState([
