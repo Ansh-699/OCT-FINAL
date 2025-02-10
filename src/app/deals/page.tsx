@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function DealsPage() {
     return (
         <div className="container-fluid">
@@ -7,10 +9,10 @@ export default function DealsPage() {
                         <h3>Deals</h3>
                         <p className="text-subtitle text-muted">View and manage your crypto deals</p>
                     </div>
-                    <a href="/deals/new" className="btn btn-primary d-flex align-items-center">
+                    <Link href="/deals/new" className="btn btn-primary d-flex align-items-center">
                         <svg className="me-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                         New Deal
-                    </a>
+                    </Link>
                 </div>
             </div>
 
