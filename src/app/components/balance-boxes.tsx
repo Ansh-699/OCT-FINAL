@@ -145,30 +145,29 @@ export function BalanceBoxes() {
             </div>
           </div>
         </section>
-      </div>
 
-      {/* Account Selection Buttons */}
-      <div className="row m-4 border border-gray-200 pt-2 ">
-        {allAccounts.map((account) => (
-          <div key={account.id} className="col-6 col-md-4 col-lg-3 mb-2">
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id={`account-${account.id}`}
-                checked={selectedAccounts.includes(account.id)}
-                onChange={() => toggleAccountSelection(account.id)}
-              />
-              <label
-                className="form-check-label"
-                htmlFor={`account-${account.id}`}
-              >
-                {account.name}
-              </label>
-            </div>
+        {/* Account Selection Buttons */}
+        <div className="row m-4 border border-gray-200 pt-2 rounded-md">
+          {allAccounts.map((account) => (
+            <div key={account.id} className="col-6 col-md-4 col-lg-3 mb-2">
+          <div className="form-check">
+            <input
+              className="form-check-input form-check-glow"
+              type="checkbox"
+              id={`account-${account.id}`}
+              checked={selectedAccounts.includes(account.id)}
+              onChange={() => toggleAccountSelection(account.id)}
+            />
+            <label
+              className="form-check-label"
+              htmlFor={`account-${account.id}`}
+            >
+              {account.name}
+            </label>
           </div>
-        ))}
-      </div>
+            </div>
+          ))}
+        </div>
 
       {/* Account Balance Cards */}
       <section className="row justify-content-center">
@@ -239,6 +238,7 @@ export function BalanceBoxes() {
             </div>
           ))}
       </section>
+      </div>
     </div>
   );
 }
