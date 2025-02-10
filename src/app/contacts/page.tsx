@@ -1,15 +1,13 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-import { Contact2, Plus, DollarSign } from "lucide-react"
-import { Button } from "../components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
-import { ContactsList } from "../components/contacts-list"
-
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Contact2, Plus, DollarSign } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { ContactsList } from "../components/contacts-list";
 
 export default function ContactsPage() {
   return (
-    <div className="page-heading">
-      {/* Header Section - Using Mazer's page-header style */}
+    <div className="page-heading container mt-10 m-4 max-w-screen-xl mx-auto overflow-hidden overflow-x-hidden no-scrollbar">
+      {/* Header Section */}
       <div className="page-title">
         <div className="row">
           <div className="col-12 col-md-6 order-md-1 order-last">
@@ -26,16 +24,16 @@ export default function ContactsPage() {
         </div>
       </div>
 
-      {/* Summary Cards - Using Mazer's card styles */}
+      {/* Summary Cards */}
       <section className="row">
         <div className="col-12 col-lg-4">
           <div className="card">
-            <div className="card-body px-3-4 py-5">
+            <div className="card-body px-4 py-5">
               <div className="row">
-                <div className="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                <div className="col-md-4 col-lg-12 d-flex justify-content-start">
                   <Contact2 className="stats-icon purple mb-2" />
                 </div>
-                <div className="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                <div className="col-md-8 col-lg-12">
                   <h6 className="text-muted font-semibold">Total Contacts</h6>
                   <h6 className="font-extrabold mb-0">2,350</h6>
                   <span className="text-success small">+180 this month</span>
@@ -44,14 +42,15 @@ export default function ContactsPage() {
             </div>
           </div>
         </div>
+        
         <div className="col-12 col-lg-4">
           <div className="card">
             <div className="card-body px-4 py-5">
               <div className="row">
-                <div className="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                <div className="col-md-4 col-lg-12 d-flex justify-content-start">
                   <DollarSign className="stats-icon blue mb-2" />
                 </div>
-                <div className="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                <div className="col-md-8 col-lg-12">
                   <h6 className="text-muted font-semibold">Active Balance</h6>
                   <h6 className="font-extrabold mb-0">$12,234</h6>
                   <span className="text-success small">+10.1% from last month</span>
@@ -62,7 +61,7 @@ export default function ContactsPage() {
         </div>
       </section>
 
-      {/* Contacts List - Using Mazer's card styles */}
+      {/* Contacts List */}
       <section className="row">
         <div className="col-12">
           <div className="card">
@@ -77,5 +76,5 @@ export default function ContactsPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

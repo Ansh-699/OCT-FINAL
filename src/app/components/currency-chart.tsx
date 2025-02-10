@@ -48,7 +48,7 @@ const data: CurrencyData[] = [
 
 export function CurrencyChart() {
   return (
-    <ResponsiveContainer width="100%" height={350}>
+    <ResponsiveContainer width="100%" height={350} className="m-4">
       <LineChart data={data}>
         <XAxis 
           dataKey="time" 

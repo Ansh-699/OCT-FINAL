@@ -31,7 +31,7 @@ export default function ExchangeRatesPage() {
 
   return (
     <div id="main ">
-      <div className=" p-10 page-heading text-start items-end justify-between max-w-[50vw]">
+      <div className=" p-10 page-heading text-start items-end justify-between max-w-[50vw] m-4">
         <div className="page-title">
           <div className="row">
             <div className="col-12">

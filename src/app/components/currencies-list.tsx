@@ -26,7 +26,7 @@ const currencies = [
 
 export function CurrenciesList() {
   return (
-    <div className="card">
+    <div className="card m-4">
       <div className="card-header">
         <h4 className="card-title">Currencies</h4>
       </div>

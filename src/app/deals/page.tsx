@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function DealsPage() {
     return (
-        <div className="container-fluid">
+        <div className="container ml-2 ">
             <div className="page-heading">
                 <div className="page-title d-flex justify-content-between align-items-center">
                     <div>
@@ -57,7 +57,7 @@ export default function DealsPage() {
 
             <section className="row mt-4">
                 <div className="col-12">
-                    <div className="card shadow-sm bg-light">
+                    <div className="card shadow-sm ">
                         <div className="card-header bg-primary text-white">
                             <h4 className="mb-0">Active Deals</h4>
                             <p className="text-white-50">A list of your active deals including their status and progress.</p>

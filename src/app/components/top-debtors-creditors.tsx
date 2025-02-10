@@ -31,7 +31,7 @@ const mockCreditors = [
 
 export function TopDebtorsCreditors() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 m-4">
       {/* Debtors */}
       <Card className="card">
         <CardHeader className="card-header">

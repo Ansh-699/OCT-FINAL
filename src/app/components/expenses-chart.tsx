@@ -27,7 +27,7 @@ const data = [
 
 export function ExpensesChart() {
   return (
-    <div className="card">
+    <div className="card m-4 ml-3">
       <div className="card-body">
         <h4 className="card-title">Expenses Distribution</h4>
         <ResponsiveContainer width="100%" height={300}>

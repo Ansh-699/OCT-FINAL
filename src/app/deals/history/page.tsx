@@ -39,7 +39,7 @@ export default function DealHistoryPage() {
 
   return (
     <motion.div
-      className="page-heading"
+      className="page-heading m-4 "
       variants={fadeIn}
       initial="initial"
       animate="animate"

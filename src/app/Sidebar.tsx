@@ -1,9 +1,8 @@
 'use client';
 
-import React, {  useState } from 'react';
-import Image from "next/image";
+import React, { useState } from 'react';
 import Link from 'next/link';
-import {usePathname} from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 interface submenu {
     name: string,
@@ -14,7 +13,7 @@ interface submenu {
 interface menuItem {
     name: string,
     icon: string,
-    link? : string,
+    link?: string,
     submenu?: Array<submenu>
 }
 
@@ -68,7 +67,7 @@ const menues: menu[] = [
                 icon: "bi bi-grid-fill",
                 link: "/expenses",
                 submenu: [
-                    { name: "All Expenses", link: "/expenses", icon:"bi bi-list-ul" },
+                    { name: "All Expenses", link: "/expenses", icon: "bi bi-list-ul" },
                     { name: "Add Expense", link: "/expenses/add", icon: "bi bi-plus-square" },
                     { name: "Expense Categories", link: "/expenses/categories", icon: "bi bi-menu-up" },
                 ]
@@ -83,7 +82,7 @@ const menues: menu[] = [
                     { name: "Currency Settings", link: "/currencies/settings", icon: "bi bi-gear" },
                 ]
             },
-            
+
         ]
     },
 ];
@@ -91,34 +90,24 @@ const menues: menu[] = [
 
 const Sidebar = () => {
     const pathname = usePathname();
-    const [activeMenu, setActiveMenu] = useState(0);
-    const [openedSubmenues, setOpenedSubmenues] = useState<number[]>([]);
+    const [openedSubmenu, setOpenedSubmenu] = useState<number | null>(null);
 
     const clickItem = (index: number, sub: any) => {
-        if(sub) {
-            let submenues = openedSubmenues;
-            if(submenues.includes(index)) {
-                submenues = submenues.filter(v => v != index);
-            } else {
-                submenues = [...openedSubmenues, index];
-            }
-            setOpenedSubmenues(submenues);
+        if (sub) {
+            setOpenedSubmenu(openedSubmenu === index ? null : index);
         }
-    }
+    };
 
     const renderSubmenues = (submenues: submenu[]) => {
-        return submenues.map((submenu, index) => {
-            return (
-                <li className="submenu-item" key={index}>
-                    <Link href={submenu.link} className="submenu-link">
-                        {submenu.icon && <i className={submenu.icon + " me-2"}></i>}
-                        {submenu.name}
-                    </Link>
-                </li>
-            )
-        })
-    }
-
+        return submenues.map((submenu, index) => (
+            <li className="submenu-item" key={index}>
+                <Link href={submenu.link} className="submenu-link">
+                    {submenu.icon && <i className={submenu.icon + " me-2"}></i>}
+                    {submenu.name}
+                </Link>
+            </li>
+        ));
+    };
 
     const renderMenuItems = (menuItems: menuItem[]) => {
         return menuItems.map((item, index) => {
@@ -126,8 +115,9 @@ const Sidebar = () => {
             let submenuesClassname = "submenu";
             if (item.submenu) itemClassname += " has-sub";
             const path = "/" + pathname.split('/')[1];
-            if(path == item.link) itemClassname += " active";
-            if(openedSubmenues.includes(index)) submenuesClassname += " submenu-open";
+            if (path == item.link) itemClassname += " active";
+            submenuesClassname += openedSubmenu === index ? " submenu-open" : "";
+
             return (
                 <li className={itemClassname} key={index} onClick={() => clickItem(index, item.submenu)}>
                     <Link href={item.link || "#"} className='sidebar-link' onClick={e => item.submenu && e.preventDefault()}>
@@ -140,22 +130,19 @@ const Sidebar = () => {
                         </ul>
                     )}
                 </li>
-            )
-
+            );
         });
-    }
-
+    };
 
     const renderMenu = () => {
-        return menues.map((menu, index) => {
-            return (
-                <>
-                    <li className="sidebar-title" key={index}>{menu.name}</li>
-                    {renderMenuItems(menu.items)}
-                </>
-            )
-        })
-    }
+        return menues.map((menu, index) => (
+            <React.Fragment key={index}>
+                <li className="sidebar-title">{menu.name}</li>
+                {renderMenuItems(menu.items)}
+            </React.Fragment>
+        ));
+    };
+
 
     return (
         <div className="sidebar-wrapper active">

@@ -19,7 +19,7 @@ export default function NewTransactionPage() {
   }
 
   return (
-    <div className="page-heading">
+    <div className="page-heading m-4">
       <div className="card">
         <div className="card-header">
           <h3 className="card-title">New Transaction</h3>

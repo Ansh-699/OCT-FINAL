@@ -49,8 +49,8 @@ const mockContactGroups: ContactGroup[] = [
 
 export default function ContactGroupsPage() {
   return (
-    <div id="main items-center justify-center">
-      <header className="mb-3">
+    <div id="main items-center justify-center ">
+      <header className="mb-3 m-4">
         <div className="col">
           <div className="col-12">
             <h1>Contact Groups</h1>
@@ -58,7 +58,7 @@ export default function ContactGroupsPage() {
         </div>
       </header>
 
-      <section className="section d-flex justify-content-start">
+      <section className="section d-flex justify-content-start m-4">
         <div className="card" style={{width: "100%"}}>
           <div className="card-header">
             <h4 className="card-title">Contact Groups List</h4>

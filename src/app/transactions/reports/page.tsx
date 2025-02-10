@@ -22,7 +22,7 @@ export default function TransactionReportsPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <div className="page-heading">
+    <div className="page-heading m-4">
       <div className="page-title">
         <div className="row">
           <div className="col-12 col-md-6 order-md-1 order-last">
