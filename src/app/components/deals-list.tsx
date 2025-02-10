@@ -12,7 +12,12 @@ interface Deal {
   price: string | number;
   total: string | number;
   status: "completed" | "pending";
+  pair?: string;
   progress: number;
+  entryPrice : number;
+  targetPrice : number;
+  stopLoss: number;
+  dateOpened:string | number;
 }
 
 export default function DealsList({ deals = [] }: { deals?: Deal[] }) {

@@ -162,7 +162,7 @@ const Sidebar = () => {
             <div className="sidebar-header position-relative">
                 <div className="d-flex justify-content-between align-items-center">
                     <div className="logo">
-                        <a href="index.html"><Image src="/assets/images/logo/logo.svg" alt="logo" width={100} height={100} /></a>
+                        <a href="/">OTC</a>
                     </div>
                     <div className="theme-toggle d-flex gap-2  align-items-center mt-2">
                         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"

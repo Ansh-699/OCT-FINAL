@@ -81,80 +81,100 @@ export function BalanceBoxes() {
     <div className="space-y-6">
       {/* Profit & Expense Overview */}
       <section className="row">
-  <div className="col-12 col-lg-4">
-    <div className="card">
-      <div className="card-body px-4 py-5">
-        <div className="row">
+      <div className="col-12 col-lg-4">
+        <div className="card hover:scale-105 transition-transform duration-200">
+        <div className="card-body px-4 py-5">
+          <div className="row">
           <div className="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
-            <TrendingUp className="stats-icon green mb-2" />
+            <i className="bi bi-arrow-up-circle-fill stats-icon green mb-2"></i>
           </div>
           <div className="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
             <h6 className="text-muted font-semibold">Total Profits</h6>
-            <h6 className="font-extrabold mb-0">USD {profit.toLocaleString()}</h6>
+            <h6 className="font-extrabold mb-0">
+            USD {profit.toLocaleString()}
+            </h6>
+          </div>
           </div>
         </div>
+        </div>
       </div>
-    </div>
-  </div>
-  
-  <div className="col-12 col-lg-4">
-    <div className="card">
-      <div className="card-body px-4 py-5">
-        <div className="row">
+
+      <div className="col-12 col-lg-4">
+        <div className="card">
+        <div className="card-body px-4 py-5">
+          <div className="row">
           <div className="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
-            <TrendingDown className="stats-icon red mb-2" />
+            <i className="bi bi-arrow-down-circle-fill stats-icon red mb-2"></i>
           </div>
           <div className="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
             <h6 className="text-muted font-semibold">Total Expenses</h6>
-            <h6 className="font-extrabold mb-0">USD {expenses.toLocaleString()}</h6>
+            <h6 className="font-extrabold mb-0">
+            USD {expenses.toLocaleString()}
+            </h6>
+          </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{/* Account Selection Buttons */}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2 px-2 sm:px-0 mt-4">
-  {allAccounts.map((account) => (
-    <button
-      key={account.id}
-      onClick={() => toggleAccountSelection(account.id)}
-      className={`${
-        selectedAccounts.includes(account.id)
-          ? "bg-primary text-white hover:bg-primary/90"
-          : "bg-secondary/10 hover:bg-secondary/20"
-      } px-3 py-2 text-sm rounded-lg transition-colors duration-200 w-full truncate font-medium`}
-    >
-      {account.name}
-    </button>
-  ))}
-</div>
-
-<section className="row mt-4">
-  {allAccounts.filter(account => selectedAccounts.includes(account.id)).map((account, index) => (
-    <div key={account.id} className="col-12 col-md-6 col-lg-4">
-      <div className="card">
-        <div className="card-body px-4 py-5">
-          <div className="row">
-            <div className="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
-              <DollarSign className="stats-icon blue mb-2" />
-            </div>
-            <div className="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-              <h6 className="text-muted font-semibold">{account.name}</h6>
-              <h6 className={`font-extrabold mb-0 ${account.balance >= 0 ? 'text-success' : 'text-danger'}`}> 
-                {account.currency} {account.balance.toLocaleString()}
-              </h6>
-              <span className={account.todaysChange >= 0 ? "text-success small" : "text-danger small"}>
-                {account.todaysChange >= 0 ? '+' : ''}{account.currency} {account.todaysChange.toLocaleString()}
-              </span>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
-  ))}
-    </section>
+
+        
+        {/* Account Selection Buttons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2 px-2 sm:px-0 mt-4">
+          {allAccounts.map((account) => (
+            <button
+              key={account.id}
+              onClick={() => toggleAccountSelection(account.id)}
+              className={`btn btn-primary me-2 ${
+              selectedAccounts.includes(account.id)
+                ? "bg-primary text-white hover:bg-primary/90 transform scale-1 font-bold"
+                : "bg-white text-black hover:bg-secondary/20"
+              } px-4 py-3 text-sm rounded-lg transition-transform duration-200 w-full truncate font-medium rounded-lg`}
+            >
+              {account.name}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="row mt-4">
+        {allAccounts
+          .filter((account) => selectedAccounts.includes(account.id))
+          .map((account, index) => (
+            <div key={account.id} className="col-12 col-md-6 col-lg-4">
+              <div className="card">
+                <div className="card-body px-4 py-5">
+                  <div className="row">
+                    <div className="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                      <DollarSign className="stats-icon blue mb-2" />
+                    </div>
+                    <div className="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                      <h6 className="text-muted font-semibold">
+                        {account.name}
+                      </h6>
+                      <h6
+                        className={`font-extrabold mb-0 ${
+                          account.balance >= 0 ? "text-success" : "text-danger"
+                        }`}
+                      >
+                        {account.currency} {account.balance.toLocaleString()}
+                      </h6>
+                      <span
+                        className={
+                          account.todaysChange >= 0
+                            ? "text-success small"
+                            : "text-danger small"
+                        }
+                      >
+                        {account.todaysChange >= 0 ? "+" : ""}
+                        {account.currency} {account.todaysChange.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+      </section>
     </div>
   );
 }

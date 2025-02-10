@@ -27,11 +27,29 @@ const mockContactGroups: ContactGroup[] = [
     email: "work@example.com",
     phoneNumber: "111-222-3333",
   },
+  {
+    id: "4",
+    name: "Gym",
+    email: "gym@example.com",
+    phoneNumber: "444-555-6666",
+  },
+  {
+    id: "5",
+    name: "Neighbors",
+    email: "neighbors@example.com",
+    phoneNumber: "777-888-9999",
+  },
+  {
+    id: "6",
+    name: "School",
+    email: "school@example.com",
+    phoneNumber: "222-333-4444",
+  },
 ];
 
 export default function ContactGroupsPage() {
   return (
-    <div id="main">
+    <div id="main items-center justify-center">
       <header className="mb-3">
         <div className="col">
           <div className="col-12">

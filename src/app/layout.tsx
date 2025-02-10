@@ -7,7 +7,7 @@ import "../scss/iconly.scss";
 import "../scss/themes/dark/app-dark.scss";
 import Sidebar from './Sidebar';
 import { useState } from 'react';
-import { cn } from "./lib/utils";
+import clsx from 'clsx'; // Use clsx for class merging
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -28,6 +28,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     { id: 4, sender: "Support Team", message: "Your KYC verification is complete. You can now trade." }
   ];
 
+  const toggleMessages = () => {
+    setMessagesOpen(!messagesOpen);
+    if (!messagesOpen) setNotificationsOpen(false);
+  };
+
+  const toggleNotifications = () => {
+    setNotificationsOpen(!notificationsOpen);
+    if (!notificationsOpen) setMessagesOpen(false);
+  };
+
   return (
     <html lang="en" data-bs-theme="light">
       <head>
@@ -38,32 +48,45 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div id="sidebar" className="active">
             <Sidebar />
           </div>
-          <div id="main" className='layout-navbar'>
-            <header className='mb-3'>
-              <nav className="navbar navbar-expand-lg navbar-light navbar-top">
-                <div className="container-fluid">
-                  <a href="#" className="burger-btn d-block">
-                    <i className="bi bi-justify fs-3"></i>
-                  </a>
-                  <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                  </button>
-                  <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                      <li className="nav-item dropdown me-1">
-                        <a
-                          className="nav-link active dropdown-toggle text-gray-600"
-                          href="#"
-                          onClick={() => setMessagesOpen(!messagesOpen)}
-                          aria-expanded="false"
-                        >
-                          <i className='bi bi-envelope bi-sub fs-4'></i>
-                        </a>
-                        <ul className={cn("dropdown-menu dropdown-menu-end dropdown-menu-lg", messagesOpen ? "show" : "")}>
-                          {messages.map(msg => (
-                            <li key={msg.id}><a className="dropdown-item" href="#">
+
+          <div id="main" className="layout-navbar">
+            <header className="mb-3"></header>
+
+            {/* Navbar */}
+            <nav className="navbar navbar-expand-lg navbar-light navbar-top">
+              <div className="container-fluid">
+                <a href="#" className="burger-btn d-block">
+                  <i className="bi bi-justify fs-3"></i>
+                </a>
+
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                >
+                  <span className="navbar-toggler-icon"></span>
+                </button>
+
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {/* Messages Dropdown */}
+                    <li className="nav-item dropdown me-1">
+                      <a
+                        className="nav-link active dropdown-toggle text-gray-600"
+                        href="#"
+                        onClick={toggleMessages}
+                        aria-expanded="false"
+                      >
+                        <i className="bi bi-envelope bi-sub fs-4"></i>
+                      </a>
+                      <ul className={clsx("dropdown-menu dropdown-menu-end dropdown-menu-lg", { show: messagesOpen })}>
+                        {messages.map((msg) => (
+                          <li key={msg.id}>
+                            <a className="dropdown-item" href="#">
                               <div className="d-flex align-items-center">
                                 <div className="avatar avatar-md">
                                   <Image src="/assets/images/faces/5.jpg" alt="User Avatar" width={40} height={40} />
@@ -73,71 +96,72 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                                   <small>{msg.message}</small>
                                 </div>
                               </div>
-                            </a></li>
-                          ))}
-                          <li>
-                            <hr className="dropdown-divider" />
-                          </li>
-                          <li className="text-center">
-                            <a className="dropdown-item" href="#">
-                              View all messages
                             </a>
                           </li>
-                        </ul>
-                      </li>
-                      <li className="nav-item dropdown me-3">
-                        <a
-                          className="nav-link active dropdown-toggle text-gray-600"
-                          href="#"
-                          onClick={() => setNotificationsOpen(!notificationsOpen)}
-                          aria-expanded="false"
-                        >
-                          <i className='bi bi-bell bi-sub fs-4'></i>
-                        </a>
-                        <ul className={cn("dropdown-menu dropdown-menu-end dropdown-menu-lg", notificationsOpen ? "show" : "")}>
-                          {notifications.map(notif => (
-                            <li key={notif.id}><a className="dropdown-item" href="#">{notif.message}</a></li>
-                          ))}
-                          <li>
-                            <hr className="dropdown-divider" />
-                          </li>
-                          <li className="text-center">
-                            <a className="dropdown-item" href="#">
-                              View all notifications
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                    <div className="d-flex align-items-center">
-                      <Link href="/signup" className="btn btn-primary me-2">Sign Up</Link>
-                      <Link href="/signin" className="btn btn-secondary me-2">Sign In</Link>
-                      <Link href="/transfer" className="btn btn-success me-2">Transfer</Link>
-                      <div className="dropdown">
-                        <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                          <div className="user-menu d-flex">
-                            <div className="user-name text-end me-3">
-                              <h6 className="mb-0 text-gray-600">John Doe</h6>
-                              <p className="mb-0 text-sm text-gray-600">Administrator</p>
-                            </div>
-                            <div className="user-img d-flex align-items-center">
-                              <div className="avatar avatar-md">
-                                <Image src="/assets/images/faces/1.jpg" alt="User Avatar" width={40} height={40} />
-                              </div>
+                        ))}
+                        <li><hr className="dropdown-divider" /></li>
+                        <li className="text-center">
+                          <a className="dropdown-item" href="#">View all messages</a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    {/* Notifications Dropdown */}
+                    <li className="nav-item dropdown me-3">
+                      <a
+                        className="nav-link active dropdown-toggle text-gray-600"
+                        href="#"
+                        onClick={toggleNotifications}
+                        aria-expanded="false"
+                      >
+                        <i className="bi bi-bell bi-sub fs-4"></i>
+                      </a>
+                      <ul className={clsx("dropdown-menu dropdown-menu-end dropdown-menu-lg", { show: notificationsOpen })}>
+                        {notifications.map((notif) => (
+                          <li key={notif.id}><a className="dropdown-item" href="#">{notif.message}</a></li>
+                        ))}
+                        <li><hr className="dropdown-divider" /></li>
+                        <li className="text-center">
+                          <a className="dropdown-item" href="#">View all notifications</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+
+                  {/* User Menu */}
+                  <div className="d-flex align-items-center">
+                    <Link href="/signup" className="btn btn-primary me-2">Sign Up</Link>
+                    <Link href="/signin" className="btn btn-secondary me-2">Sign In</Link>
+                    <Link href="/transfer" className="btn btn-success me-2">Transfer</Link>
+
+                    <div className="dropdown">
+                      <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div className="user-menu d-flex">
+                          <div className="user-name text-end me-3">
+                            <h6 className="mb-0 text-gray-600">John Doe</h6>
+                            <p className="mb-0 text-sm text-gray-600">Administrator</p>
+                          </div>
+                          <div className="user-img d-flex align-items-center">
+                            <div className="avatar avatar-md">
+                              <Image src="/assets/images/faces/1.jpg" alt="User Avatar" width={40} height={40} />
                             </div>
                           </div>
-                        </a>
-                      </div>
+                        </div>
+                      </a>
                     </div>
                   </div>
                 </div>
-              </nav>
-            </header>
+              </div>
+            </nav>
+
+            {/* Page Content */}
             {children}
           </div>
         </div>
-        <Script src='/assets/js/index.js' />
-        <Script src='/assets/js/sidebar.js' />
+
+        {/* Scripts */}
+        <Script src="/assets/js/index.js" />
+        <Script src="/assets/js/sidebar.js" />
       </body>
     </html>
   );

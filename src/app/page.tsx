@@ -13,9 +13,9 @@ export default function DashboardPage() {
                 <h2 className="text-3xl font-bold tracking-tight">Dashboard & Reporting Overview</h2>
                 
                 {/* Top Bar Icons & Controls */}
-                <div className="flex justify-end items-end space-x-4 w-full md:w-auto">
+                {/* <div className="flex justify-end items-end space-x-4 w-full md:w-auto">
                     <DateRangeSelector onDateChange={(range) => console.log(range)} />
-                </div>
+                </div> */}
             </div>
 
             {/* Balance Boxes */}

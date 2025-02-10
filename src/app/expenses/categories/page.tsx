@@ -1,10 +1,9 @@
 import type { Metadata } from "next"
 
-
-
 export default function ExpenseCategoriesPage() {
   return (
-    <div className="page-heading">
+    <div>
+      <div className="page-heading"></div>
       <div className="page-title">
         <div className="row">
           <div className="col-12 col-md-6 order-md-1 order-last">
