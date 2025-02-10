@@ -37,22 +37,25 @@ export default function TransactionReportsPage() {
             {mockReports.map((report, index) => (
               <div
                 key={index}
-                className={`alert ${
-                  hoveredIndex === index ? "alert-light-primary" : "alert-light-secondary"
+                className={`card ${
+                  hoveredIndex === index ? "border-primary" : "border-secondary"
                 } mb-4`}
+                style={{borderWidth: '1px'}}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="d-flex">
-                  <div className="flex-grow-1">
-                    <div className="text-muted">
-                      Date: {report.date} | Time: {report.transactionTime}
-                    </div>
-                    <div className="mt-2">
-                      <strong>Amount: ${report.amount}</strong>
-                      <br />
-                      From: <span className="text-primary">{report.fromAccount}</span> 
-                      To: <span className="text-success">{report.toAccount}</span>
+                <div className="card-body">
+                  <div className="d-flex">
+                    <div className="flex-grow-1">
+                      <div className="text-muted">
+                        Date: {report.date} | Time: {report.transactionTime}
+                      </div>
+                      <div className="mt-2">
+                        <strong>Amount: ${report.amount}</strong>
+                        <br />
+                        From: <span className="text-primary">{report.fromAccount}</span> 
+                        To: <span className="text-success">{report.toAccount}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
