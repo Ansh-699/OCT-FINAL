@@ -10,15 +10,15 @@ import Sidebar from './Sidebar';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const notifications = [
-    { id: 1, message: "New transaction received: 0.5 BTC ($15,234.50)!" },
-    { id: 2, message: "Your order #BTX582 for 2.3 ETH has been processed." },
-    { id: 3, message: "Market alert: BTC up 5.2% in last 24h" },
+    { id: 1, message: "Transaction failed" },
+    { id: 2, message: "Your order " },
+    { id: 3, message: "Market alert" },
    
   ];
 
   const messages = [
-    { id: 1, sender: "John Doe", message: "Hey, I've sent you 0.25 BTC. Please confirm receipt." },
-    { id: 2, sender: "Jane Smith", message: "Need help with transferring 1000 USDT to external wallet." },
+    { id: 1, sender: "John Doe", message: "Hey,." },
+    { id: 2, sender: "Jane Smith", message: "Need help" },
     
   ];
 
