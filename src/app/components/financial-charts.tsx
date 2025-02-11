@@ -33,7 +33,7 @@ export function FinancialCharts() {
       <div className="col-lg-4 col-md-12 mb-4">
         <Card className="shadow-sm h-100">
           <CardHeader>
-            <CardTitle className="text-primary">Profit & Loss Overview</CardTitle>
+            <CardTitle className="text-primary p-4">Profit & Loss Overview</CardTitle>
           </CardHeader>
           <CardContent className="p-4">
             <Chart options={options} series={profitSeries} type="line" height={300} />
@@ -54,7 +54,7 @@ export function FinancialCharts() {
       <div className="col-lg-4 col-md-12 mb-4">
         <Card className="shadow-sm h-100">
           <CardHeader>
-            <CardTitle className="text-primary">Cash Flow</CardTitle>
+            <CardTitle className="text-primary p-4">Cash Flow</CardTitle>
           </CardHeader>
           <CardContent className="p-4">
             <Chart options={options} series={cashFlowSeries} type="area" height={300} />

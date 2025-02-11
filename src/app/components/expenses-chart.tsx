@@ -21,8 +21,8 @@ const data = [
   { name: "Equipment", value: 1500 },
   { name: "Marketing", value: 2000 },
   { name: "Insurance", value: 1000 },
-  { name: "Travel", value: 1200 },
-  { name: "Others", value: 1000 },
+  // { name: "Travel", value: 1200 },
+  // { name: "Others", value: 1000 },
 ]
 
 export function ExpensesChart() {
@@ -40,7 +40,7 @@ export function ExpensesChart() {
               outerRadius={100} 
               fill="#435ebe"
               dataKey="value"
-              strokeWidth={2}
+              strokeWidth={1}
               stroke="#ffffff"
             >
               {data.map((entry, index) => (
@@ -50,7 +50,7 @@ export function ExpensesChart() {
             <Legend 
               layout="horizontal" 
               verticalAlign="bottom" 
-              align="center"
+              align="left"
             />
           </PieChart>
         </ResponsiveContainer>
