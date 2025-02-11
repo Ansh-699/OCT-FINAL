@@ -26,22 +26,22 @@ export default function DashboardPage() {
 
     return (
         <div className="space-y-6 p-6 md:p-10 max-w-screen-xl mx-auto overflow-hidden overflow-x-hidden text-start">
-            <div className="flex justify-center m-4">
+            <div className="flex justify-center m-5 text-end">
                 <button
                     id="datepicker-button"
-                    className="px-4 py-2 bg-primary text-white rounded-md shadow-md"
+                    className="px-4 py-2 bg-primary text-white rounded-md shadow-md primary-button"
                 >
                     {selectedDate ? `Selected: ${selectedDate}` : "Select Date"}
                 </button>
             </div>
 
             <div className="flex flex-col items-center space-y-8">
-                <h2 className="text-3xl font-bold tracking-tight m-4">
+                <h2 className="text-3xl font-bold tracking-tight m-5 text-center">
                     Dashboard & Reporting Overview
                 </h2>
             </div>
 
-            <div>
+            <div className="">
                 <BalanceBoxes />
             </div>
 

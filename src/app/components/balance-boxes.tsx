@@ -73,8 +73,7 @@ export function BalanceBoxes() {
   };
 
   return (
-    <div>
-      <div className="space container mt-10 m-3">
+    <div className="space container m-0 m-lg-5">
         {/* Profit & Expense Overview */}
         <section className="row m-2">
           {/* Total Profits Card */}
@@ -141,7 +140,7 @@ export function BalanceBoxes() {
         </section>
 
         {/* Account Selection Buttons */}
-        <div className="m-4  rounded-md p-3 overflow-hidden">
+        <div className="mb-4 m-4   rounded-md p-3 overflow-hidden text-center ">
   <div className="row">
     {allAccounts.map((account, index) => (
       <div key={account.id} className="col-6 col-md-4 col-lg-4 mb-2">
@@ -237,6 +236,5 @@ export function BalanceBoxes() {
             ))}
         </section>
       </div>
-    </div>
   );
 }
