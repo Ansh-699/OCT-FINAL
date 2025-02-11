@@ -35,17 +35,19 @@ export function FinancialCharts() {
           <CardHeader>
             <CardTitle className="text-primary">Profit & Loss Overview</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4">
             <Chart options={options} series={profitSeries} type="line" height={300} />
           </CardContent>
         </Card>
       </div>
 
       {/* Expenses Pie Chart - Properly Centered */}
-      <div className="col-lg-4 col-md-12 d-flex justify-content-center align-items-center">
-        <div className="w-100">
-          <ExpensesChart />
-        </div>
+      <div className="col-lg-4 col-md-12 mb-4 d-flex justify-content-center align-items-center">
+        <Card className="shadow-sm w-100 h-100">
+          <CardContent className="d-flex justify-content-center align-items-center ">
+            <ExpensesChart />
+          </CardContent>
+        </Card>
       </div>
 
       {/* Cash Flow Chart */}
@@ -54,7 +56,7 @@ export function FinancialCharts() {
           <CardHeader>
             <CardTitle className="text-primary">Cash Flow</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4">
             <Chart options={options} series={cashFlowSeries} type="area" height={300} />
           </CardContent>
         </Card>

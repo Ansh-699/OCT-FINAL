@@ -1,4 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRight, faSort } from "@fortawesome/free-solid-svg-icons";
 
 interface Column<T> {
   header: string;
@@ -23,6 +25,7 @@ function DataTable<T extends { [key: string]: any }>({
   const [searchTerm, setSearchTerm] = useState("");
   const [entriesPerPage, setEntriesPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortConfig, setSortConfig] = useState<{ key: keyof T; direction: 'asc' | 'desc' } | null>(null);
 
   const filteredData = useMemo(() => {
     if (!searchTerm) return data;
@@ -34,13 +37,26 @@ function DataTable<T extends { [key: string]: any }>({
     );
   }, [searchTerm, data]);
 
-  const totalEntries = filteredData.length;
+  const sortedData = useMemo(() => {
+    if (!sortConfig) return filteredData;
+    return [...filteredData].sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return sortConfig.direction === 'asc' ? -1 : 1;
+      }
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return sortConfig.direction === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
+  }, [filteredData, sortConfig]);
+
+  const totalEntries = sortedData.length;
   const totalPages = Math.ceil(totalEntries / entriesPerPage);
 
   const currentData = useMemo(() => {
     const start = (currentPage - 1) * entriesPerPage;
-    return filteredData.slice(start, start + entriesPerPage);
-  }, [currentPage, entriesPerPage, filteredData]);
+    return sortedData.slice(start, start + entriesPerPage);
+  }, [currentPage, entriesPerPage, sortedData]);
 
   const handlePrev = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
@@ -48,6 +64,15 @@ function DataTable<T extends { [key: string]: any }>({
 
   const handleNext = () => {
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  };
+
+  const handleSort = (key: keyof T) => {
+    setSortConfig((prev) => {
+      if (prev && prev.key === key) {
+        return { key, direction: prev.direction === 'asc' ? 'desc' : 'asc' };
+      }
+      return { key, direction: 'asc' };
+    });
   };
 
   // Reset current page when entriesPerPage or searchTerm changes
@@ -60,7 +85,7 @@ function DataTable<T extends { [key: string]: any }>({
       <h5 className={titleClass}>{title}</h5>
       <div className="d-flex justify-content-between align-items-center mb-2">
         <div>
-          Show{" "}
+          {" "}
           <select
             className="form-select d-inline-block w-auto"
             value={entriesPerPage}
@@ -72,102 +97,104 @@ function DataTable<T extends { [key: string]: any }>({
               </option>
             ))}
           </select>{" "}
-          entries
+          
         </div>
-        <div>
-          Search:{" "}
+        <div className="d-flex justify-content-end">
+          <div className="me-2 mt-2">
+            Search:{" "}
+          </div>
           <input
             type="text"
-            className="form-control d-inline-block w-auto"
+            className="form-control d-inline-block w-50"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-      </div>
-      <div className="table-responsive">
+            </div>
+            <div className="table-responsive">
         <table className="table table-striped table-bordered table-hover">
           <thead className="table-light">
             <tr>
               {columns.map((col, index) => (
-          <th key={index}>{col.header}</th>
+          <th key={index} onClick={() => handleSort(col.accessor)}>
+            {col.header} <FontAwesomeIcon icon={faSort} />
+          </th>
               ))}
             </tr>
           </thead>
-            <tbody>
+          <tbody>
             {currentData.length > 0 ? (
               currentData.map((row, rowIndex) => (
-              <tr key={rowIndex}>
-                {columns.map((col, colIndex) => (
-                <td key={colIndex} className={col.cellClass || ""}>
-                  {col.formatter
-                  ? col.formatter(row[col.accessor], row)
-                  : row[col.accessor]}
-                </td>
-                ))}
-              </tr>
+                <tr key={rowIndex}>
+                  {columns.map((col, colIndex) => (
+                    <td key={colIndex} className={col.cellClass || ""}>
+                      {col.formatter
+                        ? col.formatter(row[col.accessor], row)
+                        : row[col.accessor]}
+                    </td>
+                  ))}
+                </tr>
               ))
             ) : (
               <tr>
-              <td colSpan={columns.length} className="text-center">
-                No data found
-              </td>
+                <td colSpan={columns.length} className="text-center">
+                  No data found
+                </td>
               </tr>
             )}
-            </tbody>
-          </table>
-          </div>
-          <div className="d-flex justify-content-between align-items-center">
-          <div>
-            Showing {currentData.length} of {totalEntries} entries
-          </div>
-          <div>
+          </tbody>
+        </table>
+      </div>
+      <div className="d-flex justify-content-between align-items-center">
+        <div>
+        <span className="mx-2">
+            Page {currentPage} of {totalPages}
+          </span>
+        </div>
+        <div>
             <button
-            className="btn btn-primary ms-2"
+            className="btn btn-primary btn-sm ms-2"
             onClick={handlePrev}
             disabled={currentPage === 1}
-            style={{ width: '100px' }}
             >
-            Previous
+            <FontAwesomeIcon icon={faArrowLeft} /> 
             </button>
-            <span className="mx-2">
-            Page {currentPage} of {totalPages}
-            </span>
+            
             <button
-            className="btn btn-primary ms-2"
+            className="btn btn-primary btn-sm ms-2"
             onClick={handleNext}
             disabled={currentPage === totalPages || totalPages === 0}
-            style={{ width: '100px' }}
             >
-            Next
+             <FontAwesomeIcon icon={faArrowRight} />
             </button>
-          </div>
-          </div>
         </div>
-        );
-      }
+      </div>
+    </div>
+  );
+}
 
-      export function TopDebtorsCreditors() {
-        const debtorColumns = [
-        {
-          header: "Name",
-          accessor: "name" as const,
-          cellClass: "text-bold-500",
-        },
-        {
-          header: "Amount",
-          accessor: "amount" as const,
-          formatter: (value: number) => `$${value.toLocaleString()}`,
-          cellClass: "text-danger",
-        },
-        {
-          header: "Currency",
-          accessor: "currency" as const,
-        },
-        {
-          header: "Date",
-          accessor: "date" as const,
-        },
-        ];
+export function TopDebtorsCreditors() {
+  const debtorColumns = [
+    {
+      header: "Name",
+      accessor: "name" as const,
+      cellClass: "text-bold-500",
+    },
+    {
+      header: "Amount",
+      accessor: "amount" as const,
+      formatter: (value: number) => `$${value.toLocaleString()}`,
+      cellClass: "text-danger",
+    },
+    {
+      header: "Currency",
+      accessor: "currency" as const,
+    },
+    {
+      header: "Date",
+      accessor: "date" as const,
+    },
+  ];
 
   const creditorColumns = [
     {

@@ -44,7 +44,7 @@ export default function ExpensesPage() {
             <Card className="card">
               <CardHeader className="card-header d-flex justify-content-between align-items-center">
                 <CardTitle className="card-title">Monthly Change</CardTitle>
-                <TrendingDown className="card-header-icon" />
+                <TrendingDown className="card-header-icon"  />
               </CardHeader>
               <CardContent className="card-body">
                 <h6 className="text-muted">Change</h6>
@@ -65,20 +65,45 @@ export default function ExpensesPage() {
                 <p className="text-muted font-semibold">Active expense categories</p>
               </CardContent>
             </Card>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-md-8">
+          <div className="row">
+            <div className="col-md-8">
             <Card className="card">
               <CardHeader className="card-header">
-                <CardTitle className="card-title">Expenses Overview</CardTitle>
-                <CardDescription className="card-subtitle">Monthly expenses breakdown by category</CardDescription>
+              <CardTitle className="card-title">Expenses Overview</CardTitle>
+              <CardDescription className="card-subtitle">Monthly expenses breakdown by category</CardDescription>
               </CardHeader>
               <CardContent className="card-body">
-                <ExpensesChart />
+              <ExpensesChart />
+              <div className="mt-4">
+                <h6 className="text-muted">Category Details</h6>
+                <ul className="list-unstyled">
+                <li className="d-flex justify-content-between">
+                  <span>Rent</span>
+                  <span>$4,000</span>
+                </li>
+                <li className="d-flex justify-content-between">
+                  <span>Utilities</span>
+                  <span>$1,200</span>
+                </li>
+                <li className="d-flex justify-content-between">
+                  <span>Office Supplies</span>
+                  <span>$800</span>
+                </li>
+                <li className="d-flex justify-content-between">
+                  <span>Travel</span>
+                  <span>$2,000</span>
+                </li>
+                <li className="d-flex justify-content-between">
+                  <span>Miscellaneous</span>
+                  <span>$2,234</span>
+                </li>
+                </ul>
+              </div>
               </CardContent>
             </Card>
-          </div>
+            </div>
           <div className="col-md-4">
             <Card className="card">
               <CardHeader className="card-header">
