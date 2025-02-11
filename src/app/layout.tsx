@@ -13,13 +13,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     { id: 1, message: "Transaction failed" },
     { id: 2, message: "Your order " },
     { id: 3, message: "Market alert" },
-   
   ];
 
   const messages = [
     { id: 1, sender: "John Doe", message: "Hey,." },
     { id: 2, sender: "Jane Smith", message: "Need help" },
-    
   ];
 
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -68,35 +66,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         <li key={notif.id}><a className="dropdown-item small" href="#">{notif.message}</a></li>
                       ))}
                       <li><a className="dropdown-item text-center small" href="#">View all</a></li>
-
-                      <li className="dropdown-divider"></li>
-
-                      {/* Messages */}
-                      <li><h6 className="dropdown-header">Messages</h6></li>
-                      {messages.map((msg) => (
-                        <li key={msg.id}>
-                          <a className="dropdown-item" href="#">
-                            <div className="d-flex align-items-center">
-                              <div className="avatar avatar-sm me-2">
-                                <Image src="/assets/images/faces/5.jpg" alt={msg.sender} width={32} height={32} />
-                              </div>
-                              <div>
-                                <div className="fw-semibold">{msg.sender}</div>
-                                <small className="text-muted">{msg.message}</small>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                      ))}
-                      <li><a className="dropdown-item text-center small" href="#">View all</a></li>
-
                       <li className="dropdown-divider"></li>
 
                       {/* Auth Buttons */}
                       <li><Link className="dropdown-item" href="/signup">Sign Up</Link></li>
                       <li><Link className="dropdown-item" href="/signin">Sign In</Link></li>
                       <li><Link className="dropdown-item" href="/transfer">Transfer</Link></li>
-
                       <li className="dropdown-divider"></li>
 
                       {/* Profile Section */}
@@ -114,6 +89,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                       <li><a className="dropdown-item" href="#"><i className="bi bi-person me-2"></i>Profile</a></li>
                       <li><a className="dropdown-item" href="#"><i className="bi bi-gear me-2"></i>Settings</a></li>
                       <li><hr className="dropdown-divider" /></li>
+
+                      {/* Moved Messages Block (Second Last) */}
+                      <li><h6 className="dropdown-header">Messages</h6></li>
+                      {messages.map((msg) => (
+                        <li key={msg.id}>
+                          <a className="dropdown-item" href="#">
+                            <div className="d-flex align-items-center">
+                              <div className="avatar avatar-sm me-2">
+                                <Image src="/assets/images/faces/5.jpg" alt={msg.sender} width={32} height={32} />
+                              </div>
+                              <div>
+                                <div className="fw-semibold">{msg.sender}</div>
+                                <small className="text-muted">{msg.message}</small>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                      ))}
+                      <li><a className="dropdown-item text-center small" href="#">View all</a></li>
+                      <li className="dropdown-divider"></li>
+
+                      {/* Logout */}
                       <li><a className="dropdown-item" href="#"><i className="bi bi-box-arrow-left me-2"></i>Logout</a></li>
                     </ul>
                   </div>
@@ -158,26 +155,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </li>
 
                     <li className="nav-item dropdown me-3">
+                      {/* Manually controlled notifications dropdown */}
                       <a
-                        className="nav-link active dropdown-toggle text-gray-600"
+                        className="nav-link active text-gray-600"
                         href="#"
                         id="notificationDropdown"
                         role="button"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          toggleDropdown('notifications');
+                        }}
                       >
                         <i className="bi bi-bell bi-sub fs-4"></i>
                       </a>
-                      <ul className="dropdown-menu dropdown-menu-end dropdown-menu-lg" aria-labelledby="notificationDropdown">
-                        {notifications.map((notif) => (
-                          <li key={notif.id}><a className="dropdown-item" href="#">{notif.message}</a></li>
-                        ))}
-                        <li><hr className="dropdown-divider" /></li>
-                        <li className="text-center">
-                          <a className="dropdown-item" href="#">View all notifications</a>
-                        </li>
-                      </ul>
+                      {activeDropdown === 'notifications' && (
+                        <ul
+                          className="dropdown-menu dropdown-menu-end dropdown-menu-lg"
+                          aria-labelledby="notificationDropdown"
+                          style={{ marginTop: '10px' }}
+                        >
+                          {notifications.map((notif) => (
+                            <li key={notif.id}><a className="dropdown-item" href="#">{notif.message}</a></li>
+                          ))}
+                          <li><hr className="dropdown-divider" /></li>
+                          <li className="text-center">
+                            <a className="dropdown-item" href="#">View all notifications</a>
+                          </li>
+                        </ul>
+                      )}
                     </li>
                   </ul>
 
@@ -210,6 +215,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     </div>
                   </div>
                 </div>
+                
               </div>
             </nav>
 

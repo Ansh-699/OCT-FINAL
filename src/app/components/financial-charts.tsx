@@ -28,7 +28,7 @@ export function FinancialCharts() {
   const cashFlowSeries = [{ name: "Cash Flow", data: [2000, 3000, 4500, 1500, 4000] }];
 
   return (
-    <div className="row m-5">
+    <div className="row m-0 m-lg-5">
       {/* Profit & Loss Chart */}
       <div className="col-lg-4 col-md-12 mb-4">
         <Card className="shadow-sm h-100">
@@ -43,7 +43,7 @@ export function FinancialCharts() {
 
       {/* Expenses Pie Chart - Properly Centered */}
       <div className="col-lg-4 col-md-12 mb-4 d-flex justify-content-center align-items-center">
-        <Card className="shadow-sm w-100 h-100">
+        <Card className="shadow-sm w-100 h-100 w-lg-100">
           <CardContent className="d-flex justify-content-center align-items-center ">
             <ExpensesChart />
           </CardContent>
