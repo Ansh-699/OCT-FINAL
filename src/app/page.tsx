@@ -9,6 +9,8 @@ import { TopDebtorsCreditors } from "./components/top-debtors-creditors";
 
 export default function DashboardPage() {
     const [selectedDate, setSelectedDate] = useState("");
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     useEffect(() => {
         const datepicker = flatpickr("#datepicker-button", {
             dateFormat: "m/d/Y",
@@ -23,25 +25,60 @@ export default function DashboardPage() {
             }
         };
     }, []);
-
     return (
         <div className="space-y-6 p-6 md:p-10 max-w-screen-xl mx-auto overflow-hidden overflow-x-hidden text-start">
-            <div className="flex justify-center m-5 text-end">
+            <div className="flex justify-end m-5 p-4 relative text-start">
                 <button
                     id="datepicker-button"
-                    className="px-4 py-2 bg-primary text-white rounded-md shadow-md primary-button"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className="btn btn-primary"
                 >
-                    {selectedDate ? `Selected: ${selectedDate}` : "Select Date"}
+                    {selectedDate ? `Selected: ${selectedDate}` : "Select Date Range"}
                 </button>
+                {isDropdownOpen && (
+                    <div className="dropdown-menu show absolute right-0 mt-2 w-56 rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                        <div className="py-1">
+                            <button
+                                onClick={() => {
+                                    const today = new Date();
+                                    setSelectedDate(today.toLocaleDateString());
+                                    setIsDropdownOpen(false);
+                                }}
+                                className="dropdown-item text-xs hover:bg-[#7367F0] hover:text-white"
+                            >
+                                Today
+                            </button>
+                            <button
+                                onClick={() => {
+                                    const lastYear = new Date();
+                                    lastYear.setFullYear(lastYear.getFullYear() - 1);
+                                    setSelectedDate(lastYear.toLocaleDateString());
+                                    setIsDropdownOpen(false);
+                                }}
+                                className="dropdown-item text-xs hover:bg-[#7367F0] hover:text-white"
+                            >
+                                Last Year
+                            </button>
+                            <button
+                                onClick={() => {
+                                    const end = new Date();
+                                    const start = new Date();
+                                    start.setDate(start.getDate() - 6);
+                                    setSelectedDate(
+                                        `${start.toLocaleDateString()} - ${end.toLocaleDateString()}`
+                                    );
+                                    setIsDropdownOpen(false);
+                                }}
+                                className="dropdown-item text-xs hover:bg-[#7367F0] hover:text-white"
+                            >
+                                Last 7 Days
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
 
-            <div className="flex flex-col items-center space-y-8">
-                <h2 className="text-3xl font-bold tracking-tight m-5 text-center">
-                    Dashboard & Reporting Overview
-                </h2>
-            </div>
-
-            <div className="">
+            <div>
                 <BalanceBoxes />
             </div>
 
